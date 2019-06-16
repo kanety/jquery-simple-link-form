@@ -1,0 +1,43 @@
+<!DOCTYPE html> 
+<html>
+<head>
+  <meta charset="UTF-8">
+  <script src="node_modules/jquery/dist/jquery.min.js"></script>
+  <script src="dist/jquery-simple-link-form.js"></script>
+</head>
+<body>
+  <h1>Basic use</h1>
+  <div id="basic">
+    <a href="index.html">link1</a>
+    <a href="index.html">link2</a>
+    <a href="index.html">link3</a>
+  </div>
+  <form id="basic_form" method="get">
+    <input type="text" name="text">
+    <input type="submit">
+  </form>
+  <script>
+  $('#basic').simpleLinkForm({
+    form: '#basic_form'
+  });
+  </script>
+
+  <h1>Set submitter</h1>
+  <div id="submitter">
+    <a href="index.html" data-form-submitter="[name=submit1]">link1</a>
+    <a href="index.html" data-form-submitter="[name=submit2]">link2</a>
+    <a href="index.html" data-form-submitter="[name=submit3]">link3</a>
+  </div>
+  <form id="submitter_form" method="get">
+    <input type="text" name="text">
+    <input type="submit" name="submit1" style="display: none;" onclick="alert(this.name); return true;">
+    <input type="submit" name="submit2" style="display: none;" onclick="alert(this.name); return true;">
+    <input type="submit" name="submit3" style="display: none;" onclick="alert(this.name); return true;">
+  </form>
+  <script>
+  $('#submitter').simpleLinkForm({
+    form: '#submitter_form'
+  });
+  </script>
+</body>
+</html>
