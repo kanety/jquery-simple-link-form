@@ -20,21 +20,63 @@ describe('jquery-simple-link-form', () => {
     });
   });
 
-  describe('submitter', () => {
+  describe('submit1', () => {
     let $form;
 
     beforeEach((done) => {
-      $form = $('#submitter_form').on('submit', () => {
+      $form = $('#submit_form1').on('submit', () => {
         done();
         return false;
       });
       spyOn(window, 'alert');
-      $('#submitter').find('a:first').click();
+      spyOn(window, 'confirm');
+      $('#submit').find('a').eq(0).click();
     });
 
     it('submit form', () => {
       expect($form.attr('action')).toEqual('index.html');
       expect(window.alert).toHaveBeenCalledWith('submit1');
+      expect(window.confirm).toHaveBeenCalledWith('Are you sure?');
+    });
+  });
+
+  describe('submit2', () => {
+    let $form;
+
+    beforeEach((done) => {
+      $form = $('#submit_form1').on('submit', () => {
+        done();
+        return false;
+      });
+      spyOn(window, 'alert');
+      spyOn(window, 'confirm');
+      $('#submit').find('a').eq(1).click();
+    });
+
+    it('submit form', () => {
+      expect($form.attr('action')).toEqual('index.html');
+      expect(window.alert).toHaveBeenCalledWith('submit2');
+      expect(window.confirm).toHaveBeenCalledWith('Are you sure?');
+    });
+  });
+
+  describe('submit3', () => {
+    let $form;
+
+    beforeEach((done) => {
+      $form = $('#submit_form2').on('submit', () => {
+        done();
+        return false;
+      });
+      spyOn(window, 'alert');
+      spyOn(window, 'confirm');
+      $('#submit').find('a').eq(2).click();
+    });
+
+    it('submit form', () => {
+      expect($form.attr('action')).toEqual('index.html');
+      expect(window.alert).toHaveBeenCalledWith('submit3');
+      expect(window.confirm).toHaveBeenCalledWith('Are you sure 3?');
     });
   });
 });

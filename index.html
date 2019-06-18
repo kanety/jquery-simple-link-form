@@ -14,7 +14,7 @@
   </div>
   <form id="basic_form" method="get">
     <input type="text" name="text">
-    <input type="submit">
+    <input type="submit" style="display: none;">
   </form>
   <script>
   $('#basic').simpleLinkForm({
@@ -22,21 +22,25 @@
   });
   </script>
 
-  <h1>Set submitter</h1>
-  <div id="submitter">
-    <a href="index.html" data-form-submitter="[name=submit1]">link1</a>
-    <a href="index.html" data-form-submitter="[name=submit2]">link2</a>
-    <a href="index.html" data-form-submitter="[name=submit3]">link3</a>
+  <h1>Set options pet link</h1>
+  <div id="submit">
+    <a href="index.html">link1</a>
+    <a href="index.html" data-form-submit="submit2">link2</a>
+    <a href="index.html" data-form-submit="submit3" data-form-name="form2" data-form-confirm="Are you sure 3?">link3</a>
   </div>
-  <form id="submitter_form" method="get">
+  <form id="submit_form1" name="form1" method="get">
     <input type="text" name="text">
     <input type="submit" name="submit1" style="display: none;" onclick="alert(this.name); return true;">
     <input type="submit" name="submit2" style="display: none;" onclick="alert(this.name); return true;">
+  </form>
+  <form id="submit_form2" name="form2" method="get">
     <input type="submit" name="submit3" style="display: none;" onclick="alert(this.name); return true;">
   </form>
   <script>
-  $('#submitter').simpleLinkForm({
-    form: '#submitter_form'
+  $('#submit').simpleLinkForm({
+    form: '#submit_form1',
+    submit: '[name=submit1]',
+    confirm: 'Are you sure?'
   });
   </script>
 </body>

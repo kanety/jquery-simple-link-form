@@ -5,7 +5,8 @@ import { NAMESPACE } from './consts';
 const DEFAULTS = {
   link: 'a',
   form: 'form',
-  submitter: 'input:submit'
+  submit: 'input:submit',
+  confirm: null
 };
 
 export default class SimpleLinkForm {
@@ -13,7 +14,6 @@ export default class SimpleLinkForm {
     this.options = $.extend({}, DEFAULTS, options);
 
     this.$container = $(element);
-    this.$form = $(this.options.form);
 
     this.uid = new Date().getTime() + Math.random();
     this.namespace = `${NAMESPACE}-${this.uid}`;
@@ -39,14 +39,46 @@ export default class SimpleLinkForm {
     this.$container.off(`.${this.namespace}`);
   }
 
-  submit($link) {
-    this.$form.attr('action', $link.attr('href'));
-    this.submitter($link).click();
+  form($link) {
+    let name = $link.data('form-name');
+    if (name) {
+      return $(`form[name="${name}"]`);
+    } else {
+      return $(this.options.form);
+    }
   }
 
-  submitter($link) {
-    let selector = $link.data('form-submitter') || this.options.submitter;
-    return this.$form.find(selector);
+  submitter($link, $form) {
+    let name = $link.data('form-submit');
+    if (name) {
+      return $form.find(`[name="${name}"]`);
+    } else {
+      return $form.find(this.options.submit);
+    }
+  }
+
+  confirmation($link) {
+    return $link.data('form-confirm') || this.options.confirm;
+  }
+
+  submit($link) {
+    let $form = this.form($link);
+    let confirmation = this.confirmation($link);
+
+    if (confirmation) {
+      $form.off(`submit.${this.namespace}`).on(`submit.${this.namespace}`, (e) => {
+        if (!confirm(confirmation)) {
+          e.preventDefault();
+          return false;
+        }
+      });
+    }
+
+    let $submitter = this.submitter($link, $form);
+    if ($submitter.length) {
+      $form.attr('action', $link.attr('href'))
+      $submitter.click();
+    }
   }
 
   static getDefaults() {

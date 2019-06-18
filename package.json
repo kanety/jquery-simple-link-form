@@ -1,6 +1,6 @@
 {
   "name": "@kanety/jquery-simple-link-form",
-  "description": "A jquery plugin for form linked to anchors",
+  "description": "A jquery plugin for form submittion through link",
   "version": "0.1.0",
   "author": "Yoshikazu Kaneta <kaneta@sitebridge.co.jp>",
   "repository": {

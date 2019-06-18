@@ -1,6 +1,6 @@
 # jquery-simple-link-form
 
-A jquery plugin for form linked to anchors.
+A jquery plugin for form submittion through link.
 
 ## Dependencies
 
@@ -18,13 +18,13 @@ Build html as follows:
 
 ```html
 <div id="link">
-  <a href="index.html">link1</a>
-  <a href="index.html">link2</a>
-  <a href="index.html">link3</a>
+  <a href="index1.html">link1</a>
+  <a href="index2.html">link2</a>
+  <a href="index3.html">link3</a>
 </div>
 <form id="form" method="get">
   <input type="text" name="text">
-  <input type="submit">
+  <input type="submit" style="display: none;">
 </form>
 ```
 
@@ -38,24 +38,28 @@ $('#link').simpleLinkForm({
 
 ### Options
 
-Change selectors:
+Set selectors and confirmation:
 
 ```javascript
 $('#link').simpleLinkForm({
   ...
   link: 'a[href]',
-  submitter: 'input:submitter'
+  submit: 'input:submit',
+  confirm: 'Are you sure?'
 });
 ```
 
-Change submitter per link:
+Set options per link:
 
 ```html
-<div id="link">
-  <a href="index.html" data-form-submitter="[name=submit1]">link1</a>
-  <a href="index.html" data-form-submitter="[name=submit2]">link2</a>
-  <a href="index.html" data-form-submitter="[name=submit3]">link3</a>
-</div>
+<!-- set form -->
+<a href="index.html" data-form-name="FORM_NAME">link1</a>
+
+<!-- set submitter -->
+<a href="index.html" data-form-submit="BUTTON_NAME">link1</a>
+
+<!-- set confirmation -->
+<a href="index.html" data-form-confirm="Are you sure?">link1</a>
 ```
 
 ## License
